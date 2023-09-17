@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 import environ
 import os
 
+from django.contrib.messages import constants as messages
+
 env = environ.Env(
     DEBUG=(bool, False)
 )
@@ -172,4 +174,18 @@ LOGGING = {
             ])
         },
     },
+}
+
+EMAIL_BACKEND = env('EMAIL_BACKEND')
+
+### for key, value in os.environ.items():
+###     if key == "LS_COLORS":
+###         continue
+###     print(key, ": ", value, " (type) ", type(value))
+
+MESSAGE_TAGS = {
+    messages.ERROR: 'alert alert-danger',
+    messages.WARNING: 'alert alert-warning',
+    messages.SUCCESS: 'alert alert-success',
+    messages.INFO: 'alert alert-info',
 }
