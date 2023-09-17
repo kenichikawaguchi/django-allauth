@@ -33,7 +33,7 @@
               <ul class="list-unstyled">
                 <li><a href="#" class="text-white">Sign Up</a></li>
                 <li><a href="#" class="text-white">Log In</a></li>
-                <li><a href="mailto:admin@example.com" class="text-white">Email me</a></li>
+                <li><a href="{% url 'app1:inquiry' %}" class="text-white">INQUIRY</a></li>
               </ul>
             </div>
           </div>
@@ -57,18 +57,16 @@
       </div>
     </header>
     <main>
-      <div id="wrapper">
-        <ul class="messages" style="list-style: none;">
-        {% if messages %}
-          {% for message in messages %}
-            <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>
-              {{ message }}
-            </li>
-          {% endfor %}
-        {% endif %}
-        {% block content %}{% endblock %}
-        </ul>
-      </div>
+      <ul class="messages" style="list-style: none;">
+      {% if messages %}
+        {% for message in messages %}
+          <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>
+            {{ message }}
+          </li>
+        {% endfor %}
+      {% endif %}
+      {% block content %}{% endblock %}
+      </ul>
     </main>
     <footer class="text-muted py-5">
       <div class="container">

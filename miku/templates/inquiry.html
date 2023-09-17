@@ -3,6 +3,7 @@
 {% block title %}Inquiry{% endblock %}
 {% block content %}
 <div class="container">
+  <h2 class="my-4">Inquiry</h2>
   <div class="row">
     <form method="post">
       {% csrf_token %}
@@ -10,21 +11,33 @@
       {{ form.non_field_errors }}
 
       {% for field in form %}
-        <div class="form-group row">
-          <label for="{{ field.id_for_label }}" class="col-sm-4 col-form-label">
+        <div class="row gx-2 mb-4">
+          <label for="{{ field.id_for_label }}" class="col-md-3 col-form-label text-md-end">
             <strong>{{ field.label_tag }}</strong>
           </label>
-          <div class="col-sm-8">
+          {% if field.id_for_label == "id_name" %}
+          <div class="col-md-5">
             {{ field }}
             {{ field.errors }}
           </div>
+          {% elif field.id_for_label == "id_email" %}
+          <div class="col-md-7">
+            {{ field }}
+            {{ field.errors }}
+          </div>
+          {% else %}
+          <div class="col-md-9">
+            {{ field }}
+            {{ field.errors }}
+          </div>
+          {% endif %}
         </div>
       {% endfor %}
-      
-      <div class="offset-sm-4 col-sm-8">
-        <button class="btn btn-primary" type="submit">Send</button>
+      <div class="row">
+        <div class="col-12 text-end">
+          <button class="btn btn-primary" type="submit">Send</button>
+        </div>
       </div>
-
     </form>
   </div>
 </div>
