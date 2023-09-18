@@ -1,5 +1,6 @@
 from django import forms
 from django.core.mail import EmailMessage
+from django.conf import settings
 
 
 class InquiryForm(forms.Form):
@@ -31,14 +32,17 @@ class InquiryForm(forms.Form):
 
         subject = 'Inquiry {}'.format(title)
         message = 'Sender: {0}\nEmail: {1}\nMessage:\n{2}'.format(name, email, message)
-        from_email = 'admin@example.com'
+        EMAIL_ADMIN = getattr(settings, "EMAIL_ADMIN", None)
+        from_email = EMAIL_ADMIN
         to_list = [
-            'test@example.com'
-        ]
-        cc_list = [
             email
         ]
+        cc_list = [
+        ]
+        bcc_list = [
+            EMAIL_ADMIN
+        ]
 
-        message = EmailMessage(subject=subject, body=message, from_email=from_email, to=to_list, cc=cc_list)
+        message = EmailMessage(subject=subject, body=message, from_email=from_email, to=to_list, cc=cc_list, bcc=bcc_list)
         message.send()
 

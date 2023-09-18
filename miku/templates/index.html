@@ -7,6 +7,12 @@
     <h2 class="my-4">Project Miku</h2>
     <div class="row">
     <p>Create your own site</p>
+    {% if user.is_authenticated %}
+    {{ user.username }}
+    {{ user.email }}
+    {% else %}
+    You are a guest.
+    {% endif %}
     </div>
   </div>
 </section>

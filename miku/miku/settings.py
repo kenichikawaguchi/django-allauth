@@ -49,6 +49,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'app1.apps.App1Config',
+    'accounts.apps.AccountsConfig',
+
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
 ]
 
 MIDDLEWARE = [
@@ -59,6 +64,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'allauth.account.middleware.AccountMiddleware',
 ]
 
 ROOT_URLCONF = 'miku.urls'
@@ -87,7 +94,15 @@ WSGI_APPLICATION = 'miku.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    'default': env.db(),
+    # 'default': env.db(),
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': env('DB_NAME'),
+        'USER': env('DB_USER'),
+        'PASSWORD': env('DB_PASSWORD'),
+        'HOST': '',
+        'PORT': '',
+    },
 
     'extra': env.db_url(
         'SQLITE_URL',
@@ -176,12 +191,6 @@ LOGGING = {
     },
 }
 
-EMAIL_BACKEND = env('EMAIL_BACKEND')
-
-### for key, value in os.environ.items():
-###     if key == "LS_COLORS":
-###         continue
-###     print(key, ": ", value, " (type) ", type(value))
 
 MESSAGE_TAGS = {
     messages.ERROR: 'alert alert-danger',
@@ -189,3 +198,42 @@ MESSAGE_TAGS = {
     messages.SUCCESS: 'alert alert-success',
     messages.INFO: 'alert alert-info',
 }
+
+EMAIL_BACKEND = env('EMAIL_BACKEND')
+EMAIL_ADMIN = env('EMAIL_ADMIN')
+DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL')
+EMAIL_HOST = env('EMAIL_HOST')
+EMAIL_PORT = env('EMAIL_PORT', int)
+EMAIL_HOST_USER = env('EMAIL_HOST_USER', str)
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
+EMAIL_USE_TLS = env('EMAIL_USE_TLS') == "True"
+
+AUTH_USER_MODEL = 'accounts.CustomUser'
+
+SITE_ID = 1
+
+AUTHENTICATION_BACKENDS = (
+    'allauth.account.auth_backends.AuthenticationBackend',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_USERNAME_REQUIRED = True
+
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_EMAIL_REQUIRED = True
+
+LOGIN_REDIRECT_URL = 'app1:index'
+ACCOUNT_LOGOUT_REDIRECT_URL = 'app1:index'
+
+ACCOUNT_LOGOUT_ON_GET = True
+
+ACCOUNT_FORMS = {
+    "signup": "accounts.forms.CustomSignupForm",
+    "login": "accounts.forms.CustomLoginForm",
+    "reset_password": "accounts.forms.CustomResetPasswordForm",
+    "reset_password_from_key": "accounts.forms.CustomResetPasswordKeyForm",
+}
+
+ACCOUNT_ADAPTER = "accounts.adapter.AccountAdapter"
+

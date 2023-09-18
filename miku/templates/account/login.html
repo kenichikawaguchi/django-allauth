@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}Log In | Miku{% endblock %}
+{% block content %}
+<div class="container">
+  <div class="row">
+    <h2 class="my-4">Log In</h2>
+    <form method="post" action="{% url 'account_login' %}">
+      {% csrf_token %}
+
+      {% for field in form %}
+        <div class="row gx-2 mb-4">
+          <label for="{{ field.id_for_label }}" class="col-md-3 col-form-label text-md-end">
+            <strong>{{ field.label_tag }}</strong>
+          </label>
+          <div class="col-md-5">
+          {{ field }}
+          {{ field.errors }}
+          </div>
+        </div>
+      {% endfor %}
+      {% if redirect_field_value %}
+        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+      {% endif %}
+      <div class="row">
+        <div class="col-md-8 text-end">
+          <button class="btn btn-primary" type="submit">Log In</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}
