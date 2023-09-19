@@ -233,6 +233,9 @@ ACCOUNT_FORMS = {
     "login": "accounts.forms.CustomLoginForm",
     "reset_password": "accounts.forms.CustomResetPasswordForm",
     "reset_password_from_key": "accounts.forms.CustomResetPasswordKeyForm",
+    "change_password": "accounts.forms.CustomChangePasswordForm",
+    "add_email": "accounts.forms.CustomAddEmailForm",
+    "set_password": "accounts.forms.CustomSetPasswordForm",
 }
 
 ACCOUNT_ADAPTER = "accounts.adapter.AccountAdapter"
