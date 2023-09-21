@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Blog | Project Miku{% endblock %}
+{% block content %}
+<section>
+  <div class="container">
+    <h2 class="my-4">{{ object.title }}</h2>
+    <div class="row">
+    <p>Blog your own site</p>
+      <div class="col-md-10 col-lg-8 col-xl-7">
+        <div class="post-preview">
+            <h2 class="post-title">
+              {{ object.title }}</h2>
+              <p>
+                {{ object.content }}
+              </p>
+          <p class="post-meta">
+            Post at {{ object.posted_at }}
+          </p>
+        </div>
+
+        <div class="d-flex justify-content-end mb-4">
+          <a class="btn btn-primary text-uppercase" href="#!">
+            Older Posts ->
+          </a>
+        </div>
+      </div>
+    <div class="row">
+    {% if user.is_authenticated %}
+    {{ user.username }}
+    {{ user.email }}
+    {% else %}
+    You are a guest.
+    {% endif %}
+    </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

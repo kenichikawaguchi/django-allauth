@@ -10,33 +10,26 @@
       <div class="col-md-10 col-lg-8 col-xl-7">
         {% for record in orderby_records %}
         <div class="post-preview">
-          <a href="post.html">
+          <a href="{% url 'blog:blog_detail' record.pk %}">
             <h2 class="post-title">
               {{ record.title }}</h2>
             <h3 class="post-subtitle">
               <span style="font-size : 14pt">
                 {{ record.content| truncatechars:50}}
               </span>
+            </h3>
           </a>
           <p class="post-meta">
           <a href="#">Django's Blog</a>
             Post at {{ record.posted_at }}
           </p>
         </div>
+
+        <hr class="my-4" />
         {% endfor %}
 
-        <div class="d-flex justify-content-end mb-4">
-          <a class="btn btn-primary text-uppercase" href="#!">
-            Older Posts ->
-          </a>
-        </div>
+        {% include "pagination.html" %}
       </div>
-    {% if user.is_authenticated %}
-    {{ user.username }}
-    {{ user.email }}
-    {% else %}
-    You are a guest.
-    {% endif %}
     </div>
   </div>
 </section>
