@@ -3,5 +3,9 @@ from django.contrib import admin
 from .models import CustomUser, UserType
 
 
-admin.site.register(CustomUser)
+class CustomUserAdmin(admin.ModelAdmin):
+    list_display = ('username', 'user_type')
+
+
+admin.site.register(CustomUser, CustomUserAdmin)
 admin.site.register(UserType)
