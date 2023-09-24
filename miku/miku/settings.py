@@ -257,6 +257,3 @@ ACCOUNT_FORMS = {
 }
 
 ACCOUNT_ADAPTER = "accounts.adapter.AccountAdapter"
-
-print("EMAIL_ADMIN:", EMAIL_ADMIN)
-print("LANGUAGE_CODE:", LANGUAGE_CODE)
