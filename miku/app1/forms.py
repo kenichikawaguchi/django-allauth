@@ -22,7 +22,7 @@ class InquiryForm(forms.Form):
         self.fields['title'].widget.attrs['placeholder'] = 'title'
 
         self.fields['message'].widget.attrs['class'] = 'form-control col-12'
-        self.fields['title'].widget.attrs['placeholder'] = 'message'
+        self.fields['message'].widget.attrs['placeholder'] = 'message'
 
     def send_email(self):
         name = self.cleaned_data['name']
