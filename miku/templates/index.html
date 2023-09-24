@@ -7,6 +7,7 @@
     <h2 class="my-4">Project Miku</h2>
     <div class="row">
     <p>Create your own site</p>
+    <p>{{ LANGUAGE_CODE }}</p>
     {% if user.is_authenticated %}
     {{ user.username }}
     {{ user.email }}
