@@ -10,7 +10,7 @@ class UserType(models.Model):
 
 
 class CustomUser(AbstractUser):
-    user_type = models.ForeignKey(UserType, on_delete=models.PROTECT, default=3)
+    user_type = models.ForeignKey(UserType, on_delete=models.PROTECT, null=True)
     class Meta:
         verbose_name_plural = 'CustomUser'
 
