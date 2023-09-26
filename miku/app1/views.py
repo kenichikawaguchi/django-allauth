@@ -10,6 +10,7 @@ from django.shortcuts import render, redirect
 
 from django.core.mail import EmailMessage
 from django.conf import settings
+from django.utils.translation import gettext as _
 
 logger = logging.getLogger(__name__)
 
@@ -45,11 +46,11 @@ def contact_view(request):
             title = form.cleaned_data['title']
             message = form.cleaned_data['message']
             if request.user.is_authenticated:
-                message = "Member's Message:\n" + message
+                message = _("Member's Message") + ":\n" + message
             else:
-                message = "Guest's Message:\n" + message
+                message = _("Guest's Message") + ":\n" + message
 
-            subject = "Inquiry: {}".format(title)
+            subject = _("Inquiry") + ": {}".format(title)
 
             message = \
                 'Sender:{0}\nEmail: {1}\nTitle:{2}\nMessage:\n{3}'\

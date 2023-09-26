@@ -1,13 +1,14 @@
 from django import forms
 from django.core.mail import EmailMessage
 from django.conf import settings
+from django.utils.translation import gettext as _
 
 
 class InquiryForm(forms.Form):
-    name = forms.CharField(label="name", max_length=30)
-    email = forms.EmailField(label="email")
-    title = forms.CharField(label="title", max_length=30)
-    message = forms.CharField(label="message", widget=forms.Textarea)
+    name = forms.CharField(label=_("name"), max_length=30)
+    email = forms.EmailField(label=_("email"))
+    title = forms.CharField(label=_("title"), max_length=30)
+    message = forms.CharField(label=_("message"), widget=forms.Textarea)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

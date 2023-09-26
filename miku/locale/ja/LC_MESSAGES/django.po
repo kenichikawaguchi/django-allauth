@@ -1,0 +1,290 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-09-26 23:15+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: app1/forms.py:8
+msgid "name"
+msgstr "氏名"
+
+#: app1/forms.py:9
+msgid "email"
+msgstr "Eメール"
+
+#: app1/forms.py:10
+msgid "title"
+msgstr "タイトル"
+
+#: app1/forms.py:11
+msgid "message"
+msgstr "メッセージ"
+
+#: app1/views.py:49
+msgid "Member's Message"
+msgstr "メンバーメッセージ"
+
+#: app1/views.py:51
+msgid "Guest's Message"
+msgstr "お客様メッセージ"
+
+#: app1/views.py:53 templates/inquiry.html:3 templates/inquiry.html:6
+msgid "Inquiry"
+msgstr "お問合せ"
+
+#: templates/account/account_inactive.html:3
+#: templates/account/account_inactive.html:7
+msgid "Account Inactive"
+msgstr ""
+
+#: templates/account/account_inactive.html:8
+msgid "This account is inactive."
+msgstr ""
+
+#: templates/account/email.html:5 templates/account/email.html:10
+msgid "Email Addresses"
+msgstr ""
+
+#: templates/account/email.html:11
+#, fuzzy
+#| msgid "name"
+msgid "Username"
+msgstr "氏名"
+
+#: templates/account/email.html:13
+msgid "The following email addresses are associated with your account:"
+msgstr ""
+
+#: templates/account/email.html:28
+msgid "Verified"
+msgstr ""
+
+#: templates/account/email.html:30
+msgid "Unverified"
+msgstr ""
+
+#: templates/account/email.html:32
+msgid "Primary"
+msgstr ""
+
+#: templates/account/email.html:42
+msgid "Make Primary"
+msgstr ""
+
+#: templates/account/email.html:43 templates/account/email_change.html:23
+msgid "Re-send Verification"
+msgstr ""
+
+#: templates/account/email.html:44
+msgid "Remove"
+msgstr ""
+
+#: templates/account/email.html:58
+msgid "Add Email Address"
+msgstr ""
+
+#: templates/account/email.html:75
+msgid "Add Email"
+msgstr ""
+
+#: templates/account/email.html:86
+msgid "Do you really want to remove the selected email address?"
+msgstr ""
+
+#: templates/account/email/account_already_exists_message.txt:4
+#, python-format
+msgid ""
+"You are receiving this email because you or someone else tried to signup for "
+"an\n"
+"account using email address:\n"
+"\n"
+"%(email)s\n"
+"\n"
+"However, an account using that email address already exists.  In case you "
+"have\n"
+"forgotten about this, please use the password forgotten procedure to "
+"recover\n"
+"your account:\n"
+"\n"
+"%(password_reset_url)s"
+msgstr ""
+
+#: templates/account/email/account_already_exists_subject.txt:3
+msgid "Account Already Exists"
+msgstr ""
+
+#: templates/account/email/base_message.txt:1
+#, python-format
+msgid "Hello from %(site_name)s!"
+msgstr ""
+
+#: templates/account/email/base_message.txt:5
+#, python-format
+msgid ""
+"Thank you for using %(site_name)s!\n"
+"%(site_domain)s"
+msgstr ""
+
+#: templates/account/email/email_confirmation_message.txt:5
+#, python-format
+msgid ""
+"You're receiving this email because user %(user_display)s has given your "
+"email address to register an account on %(site_domain)s.\n"
+"\n"
+"To confirm this is correct, go to %(activate_url)s "
+msgstr ""
+
+#: templates/account/email/email_confirmation_subject.txt:3
+msgid "Please Confirm Your Email Address"
+msgstr ""
+
+#: templates/account/email/password_reset_key_message.txt:4
+msgid ""
+"You're receiving this email because you or someone else has requested a "
+"password reset for your user account.\n"
+"It can be safely ignored if you did not request a password reset. Click the "
+"link below to reset your password."
+msgstr ""
+"このメールは、あなたまたは他の誰かがユーザーアカウントのパスワードリセットを"
+"リクエストしたため、お送りしています。パスワードリセットをリクエストしていな"
+"い場合は、安全に無視していただいて結構です。パスワードをリセットするために以"
+"下のリンクをクリックしてください。"
+
+#: templates/account/email/password_reset_key_message.txt:9
+#, python-format
+msgid "In case you forgot, your username is %(username)s."
+msgstr "もし忘れてしまった場合、あなたのユーザー名は%(username)sです。"
+
+#: templates/account/email/password_reset_key_subject.txt:3
+#: templates/account/email/unknown_account_subject.txt:3
+msgid "Password Reset Email"
+msgstr ""
+
+#: templates/account/email/unknown_account_message.txt:4
+#, python-format
+msgid ""
+"You are receiving this email because you or someone else has requested a\n"
+"password for your user account. However, we do not have any record of a "
+"user\n"
+"with email %(email)s in our database.\n"
+"\n"
+"This mail can be safely ignored if you did not request a password reset.\n"
+"\n"
+"If it was you, you can sign up for an account using the link below."
+msgstr ""
+
+#: templates/account/email_change.html:4 templates/account/email_change.html:9
+msgid "Email Address"
+msgstr ""
+
+#: templates/account/email_change.html:13
+msgid "The following email address is associated with your account:"
+msgstr ""
+
+#: templates/account/email_change.html:18
+msgid "Your email address is still pending verification:"
+msgstr ""
+
+#: templates/account/email_change.html:29
+msgid "Change Email Address"
+msgstr ""
+
+#: templates/account/email_change.html:33
+msgid "Change Email"
+msgstr ""
+
+#: templates/account/email_confirm.html:13
+#, python-format
+msgid ""
+"Please confirm that <strong>%(email)s</strong> is an email address for user "
+"%(user_display)s."
+msgstr ""
+
+#: templates/account/login.html:7 templates/account/login.html:27
+#: templates/base.html:41
+msgid "Log In"
+msgstr "ログイン"
+
+#: templates/account/login.html:32 templates/account/password_change.html:32
+msgid "Forgot Password?"
+msgstr ""
+
+#: templates/account/password_change.html:5
+#: templates/account/password_change.html:10
+#: templates/account/password_change.html:27
+#: templates/account/password_reset_from_key.html:29
+#: templates/account/password_reset_from_key_done.html:7
+msgid "Change Password"
+msgstr "パスワード変更"
+
+#: templates/account/password_reset.html:7
+#: templates/account/password_reset_done.html:7
+#: templates/account/password_reset_from_key.html:7
+msgid "Password Reset"
+msgstr "パスワードリセット"
+
+#: templates/account/password_reset.html:27 templates/account/signup.html:27
+#: templates/inquiry.html:38
+msgid "Send"
+msgstr "送信"
+
+#: templates/account/password_reset_done.html:11
+msgid ""
+"We have sent you an email. If you have not received it please check your "
+"spam folder."
+msgstr ""
+"メールをお送りしました。受信されていない場合は、スパムフォルダをご確認くださ"
+"い。"
+
+#: templates/account/password_reset_from_key.html:7
+msgid "Token Error"
+msgstr ""
+
+#: templates/account/password_reset_from_key.html:11
+msgid ""
+"The password reset link was invalid, possibly because it has already been "
+"used.  Please request a <a href=\"{{ passwd_reset_url }}\">new password reset"
+msgstr ""
+
+#: templates/account/password_reset_from_key_done.html:8
+msgid "Your password is now changed."
+msgstr ""
+
+#: templates/account/password_set.html:3 templates/account/password_set.html:7
+#: templates/account/password_set.html:24
+msgid "Set Password"
+msgstr ""
+
+#: templates/account/signup.html:7 templates/base.html:40
+msgid "Sign Up"
+msgstr ""
+
+#: templates/base.html:34
+msgid "Contact"
+msgstr "コンタクト"
+
+#: templates/base.html:37
+msgid "Hello"
+msgstr "こんにちは"
+
+#: templates/base.html:38
+msgid "Log Out"
+msgstr "ログアウト"
+
+#: templates/base.html:43
+msgid "INQUIRY"
+msgstr "お問合せ"
