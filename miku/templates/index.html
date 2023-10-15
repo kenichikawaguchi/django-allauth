@@ -2,18 +2,106 @@
 {% load static %}
 {% block title %}Project Miku{% endblock %}
 {% block content %}
+{% load tz %}
 <section>
   <div class="container">
-    <h2 class="my-4">Project Miku</h2>
-    <div class="row">
-    <p>Create your own site</p>
+    <h2 class="my-4" id="index-title">Project Miku</h2>
+    <div class="row bg-secondary text-light my-2">
+      <h5>Debug Info.</h5>
+      <ul class="list-unstyled ps-4" id="debug1">
+      </ul>
+    </div>
+    <script>
+      setDbgMsg("testmessage");
+    </script>
+    <button type="button" id="backInTable">now</button>
+    <p id="tzname"></p>
+    <script>
+      var tzname = Intl.DateTimeFormat().resolvedOptions().timeZone;
+      tznameobj = document.getElementById("tzname");
+      tznameobj.innerText = "Timezone: " + tzname;
+    </script>
+    <div class="table-responsive timetable-container">
+      <table class="table table-hover text-nowrap" id="timetable">
+      </table>
+    </div>
+    <script src="{% static 'js/createTimetable.js' %}"></script>
+    <div class="row" id="timetable2">
+    </div>
+    <script>
+      const lesson_list = [];
+      let lesson_slot;
+      const timetable2 = document.getElementById('timetable2');
+      {% for lesson in all_lessons %}
+        tmp_p = document.createElement('p');
+        tmp_p.innerText = new Date('{{ lesson.time|date:"r" }}').getStr();
+        tmp_p.innerText = tmp_p.innerText + ", Student: {{ lesson.student }}, Teacher: {{ lesson.teacher }}, booking: {{ lesson.booking }}";
+        timetable2.appendChild(tmp_p);
+        try {
+          const tmp_t = new Date('{{ lesson.time|date:"r" }}').getId();
+          lesson_slot2 = document.getElementById(tmp_t);
+          tmp_p.innerText += " " + lesson_slot2.cellIndex + " " + new Date('{{ lesson.time|date:"r" }}').getTimeOffset();
+          tmp_button = document.createElement('button');
+          downOffset = new Date('{{ lesson.time|date:"r" }}').getTimeOffset();
+          tmp_button.addEventListener("click", {scrollLeft: lesson_slot2.cellIndex, scrollDown: downOffset, handleEvent: scrollTable});
+          tmp_button.type = 'button';
+          tmp_button.value = lesson_slot2.cellIndex + "*" + downOffset;
+          tmp_button.textContent = "move";
+          tmp_p.appendChild(tmp_button);
+          if(lesson_slot2 !== null){
+            const booking_text = {% if lesson.booking == True %}"closed";{% else %}"open";{% endif %}
+            {% if request.user.is_authenticated %}
+              {% if user == lesson.student %}
+                const lesson_text = new Date('{{ lesson.time|date:"r" }}').getStr() + "Student is you. " + " Teacher: {{ lesson.teacher }}, " + booking_text;
+                lesson_slot2.classList.add("bg-info");
+              {% else %}
+                const lesson_text = new Date('{{ lesson.time|date:"r" }}').getStr() + " Teacher: {{ lesson.teacher }}, " + booking_text;
+              {% endif %}
+            {% else %}
+            const lesson_text = new Date('{{ lesson.time|date:"r" }}').getStr() + " Teacher: {{ lesson.teacher }}, " + booking_text;
+            {% endif %}
+            lesson_slot2.innerHTML = lesson_slot2.innerHTML + "<br />"+ lesson_text;
+          }
+        } catch(err) {
+          const dbg2 =document.createElement('p');
+          dbg2.innerText = err  + new Date('{{ lesson.time|date:"r" }}').getStr();
+          timetable2.appendChild(dbg2);
+        }
+      {% endfor %}
+    </script>
+    <div class="row col-sm-4">
+    <table class="table table-hover">
+    <thead>
+      <tr class="table-light"><th>Username</th><th>Email</th>
+    </thead>
     {% if user.is_authenticated %}
-    {{ user.username }}
-    {{ user.email }}
+      <tr><td>{{ user.username }}</td><td>{{ user.email }}</td></tr>
     {% else %}
-    You are a guest.
+      <tr><td>(guest)</td><td> - </td></tr>
     {% endif %}
+    </table>
+      <div>
+      {{ general_date|date:"Y/m/j" }}
+      </div>
+      <div>
+      {% localtime on %}
+      <p>localtime on : {{ general_date|date:"r" }}</p>
+      {% endlocaltime %}
+      {% localtime off %}
+      <p>localtime off : {{ general_date|date:"r" }}</p>
+      <p> server localtime off: {{ CST_ex|date:"r" }}</p>
+      <p id="dbgLocalTime"> CST2LT: </p>
+      <script>
+      var mytime1 = new Date('{{ CST_ex|date:"r" }}').getStr();
+      var mytime2 = new Date('{{ CST_ex|date:"r" }}').getId();
+      const dbgLocalTime = document.getElementById("dbgLocalTime");
+      dbgLocalTime.innerText = dbgLocalTime.innerText + mytime1.toString();
+      dbgLocalTime.innerText = dbgLocalTime.innerText + mytime2.toString();
+      </script>
+      {% endlocaltime %}
+      </div>
     </div>
   </div>
 </section>
+<script src="{% static 'js/tableScroll.js' %}"></script>
 {% endblock %}

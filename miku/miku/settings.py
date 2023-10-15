@@ -223,6 +223,7 @@ ACCOUNT_USERNAME_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 ACCOUNT_EMAIL_REQUIRED = True
 
+LOGIN_URL = 'app1:index'
 LOGIN_REDIRECT_URL = 'app1:index'
 ACCOUNT_LOGOUT_REDIRECT_URL = 'app1:index'
 
@@ -240,3 +241,6 @@ ACCOUNT_FORMS = {
 
 ACCOUNT_ADAPTER = "accounts.adapter.AccountAdapter"
 
+DATE_FORMAT = 'Y-m-d'
+
+TIME_FORMAT = 'H:i:s'
