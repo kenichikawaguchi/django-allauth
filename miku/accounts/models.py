@@ -15,3 +15,6 @@ class CustomUser(AbstractUser):
         verbose_name_plural = 'CustomUser'
 
 
+class UserTypeList(models.Model):
+    user_type = models.ForeignKey(UserType, on_delete=models.PROTECT, blank=True, null=True)
+    user = models.ForeignKey(CustomUser, on_delete=models.PROTECT, blank=True, null=True)
