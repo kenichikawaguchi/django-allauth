@@ -43,7 +43,8 @@
           tmp_p.innerText += " " + lesson_slot2.cellIndex + " " + new Date('{{ lesson.time|date:"r" }}').getTimeOffset();
           tmp_button = document.createElement('button');
           downOffset = new Date('{{ lesson.time|date:"r" }}').getTimeOffset();
-          tmp_button.addEventListener("click", {scrollLeft: lesson_slot2.cellIndex, scrollDown: downOffset, handleEvent: scrollTable});
+          /* tmp_button.addEventListener("click", {scrollLeft: lesson_slot2.cellIndex, scrollDown: downOffset, handleEvent: scrollTable}); */
+          tmp_button.addEventListener("click", {scrollLeft: lesson_slot2.cellIndex, scrollDown: lesson_slot2.parentElement.rowIndex, handleEvent: scrollTable});
           tmp_button.type = 'button';
           tmp_button.value = lesson_slot2.cellIndex + "*" + downOffset;
           tmp_button.textContent = "move";
