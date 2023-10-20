@@ -11,6 +11,7 @@ class UserType(models.Model):
 
 class CustomUser(AbstractUser):
     user_type = models.ForeignKey(UserType, on_delete=models.PROTECT, null=True)
+    email = models.EmailField(unique=True)
     class Meta:
         verbose_name_plural = 'CustomUser'
 
