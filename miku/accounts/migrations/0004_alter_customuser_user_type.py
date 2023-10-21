@@ -18,10 +18,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='customuser',
             name='user_type',
-<<<<<<< HEAD
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.PROTECT, to='accounts.usertype'),
-=======
             field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.PROTECT, to='accounts.usertype'),
->>>>>>> main
         ),
     ]
