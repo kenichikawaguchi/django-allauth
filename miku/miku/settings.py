@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 import environ
 import os
+import sys
 
 from django.contrib.messages import constants as messages
 
@@ -24,7 +25,13 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
+if os.path.isfile(os.path.join(BASE_DIR, '.env')):
+    environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
+elif os.path.isfile(os.path.join(BASE_DIR, '.env_sample')):
+    environ.Env.read_env(os.path.join(BASE_DIR, '.env_sample'))
+else:
+    print(".env or .env_sample is required.")
+    sys.exit()
 
 DEBUG = env('DEBUG')
 
@@ -59,6 +66,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    # 'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -93,11 +101,19 @@ WSGI_APPLICATION = 'miku.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+if env('DB_TYPE') == 'postgresql':
+    DB_ENGINE = 'django.db.backends.postgresql_psycopg2'
+    DB_NAME = env('DB_NAME')
+else:
+    DB_ENGINE = 'django.db.backends.sqlite3'
+    DB_NAME = os.path.join(BASE_DIR, 'db.sqlite3')
+
+
 DATABASES = {
     # 'default': env.db(),
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': env('DB_NAME'),
+        'ENGINE': DB_ENGINE,
+        'NAME': DB_NAME,
         'USER': env('DB_USER'),
         'PASSWORD': env('DB_PASSWORD'),
         'HOST': '',
@@ -133,7 +149,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ja'
+# LANGUAGE_CODE = 'en-us'
+
 
 TIME_ZONE = 'Asia/Tokyo'
 
@@ -240,6 +258,7 @@ ACCOUNT_FORMS = {
 }
 
 ACCOUNT_ADAPTER = "accounts.adapter.AccountAdapter"
+LOCALE_PATHS = [os.path.join(BASE_DIR, 'locale')]
 
 DATE_FORMAT = 'Y-m-d'
 

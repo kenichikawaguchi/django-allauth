@@ -9,6 +9,7 @@ from allauth.account.forms import (
 )
 from django import forms
 from .models import CustomUser
+from django.utils.translation import gettext as _
 
 class CustomSignupForm(SignupForm):
 
@@ -31,10 +32,15 @@ class CustomLoginForm(LoginForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        for field in self.fields.values():
-            if field.label == "Remember Me":
+        for key, value in self.fields.items():
+            if key == "remember":
                 continue
-            field.widget.attrs['class'] = 'form-control'
+            value.widget.attrs['class'] = 'form-control'
+
+        # for field in self.fields.values():
+        #     if field.label == _("Remember Me"):
+        #         continue
+        #     field.widget.attrs['class'] = 'form-control'
 
 
 class CustomResetPasswordForm(ResetPasswordForm):

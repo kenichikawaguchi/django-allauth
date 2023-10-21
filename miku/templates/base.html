@@ -1,7 +1,9 @@
 {% load static %}
+{% load i18n %}
 {% now "Y" as current_year %}
+{% get_current_language as LANGUAGE_CODE %}
 <!Doctype html>
-<html lang="en">
+<html lang="{{ LANGUAGE_CODE }}">
   <head>
     <meta charset="utf-8" />
     <meta name="viewpoint" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -31,16 +33,16 @@
               </p>
             </div>
             <div class="col-sm-4 offset-md-1 py-4">
-              <h4 class="text-white">Contact</h4>
+              <h4 class="text-white">{% trans "Contact" %}</h4>
               <ul class="list-unstyled">
               {% if user.is_authenticated %}
-                <li><a href="#" class="text-white">Hello, {{ user.username }}!</a></li>
-                <li><a href="{% url 'account_logout' %}" class="text-white">Log Out</a></li>
+                <li><a href="#" class="text-white">{% trans "Hello" %}, {{ user.username }}!</a></li>
+                <li><a href="{% url 'account_logout' %}" class="text-white">{% trans "Log Out" %}</a></li>
               {% else %}
-                <li><a href="{% url 'account_signup' %}" class="text-white">Sign Up</a></li>
-                <li><a href="{% url 'account_login' %}" class="text-white">Log In</a></li>
+                <li><a href="{% url 'account_signup' %}" class="text-white">{% trans "Sign Up" %}</a></li>
+                <li><a href="{% url 'account_login' %}" class="text-white">{% trans "Log In" %}</a></li>
               {% endif %}
-                <li><a href="{% url 'app1:inquiry' %}" class="text-white">INQUIRY</a></li>
+                <li><a href="{% url 'app1:inquiry' %}" class="text-white">{% trans "INQUIRY" %}</a></li>
               </ul>
             </div>
           </div>
