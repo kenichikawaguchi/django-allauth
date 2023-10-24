@@ -30,6 +30,23 @@ Date.prototype.getTimeOffset=function(){
   return Math.trunc(this.getHours()*2 + this.getMinutes() / 30) + 1;
 };
 
+
+const shortDayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+const DayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+
+
+Date.prototype.getShortDayName=function(){
+  dayNumber = this.getDay();
+  return shortDayNames[dayNumber];
+}
+
+
+Date.prototype.getDayName=function(){
+  dayNumber = this.getDay();
+  return DayNames[dayNumber];
+}
+
+
 function setDbgMsg(message=message, position="debug1"){
   const element = document.getElementById(position);
   tmp_li = document.createElement('li');

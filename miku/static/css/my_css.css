@@ -64,6 +64,14 @@ body {
     background-color: #ccebff;
 }
 
+#timetable .Sun {
+    background-color: #FFD5EC;
+}
+
+#timetable .Sat {
+    background-color: #CEF9DC;
+}
+
 #timetable .today-column {
     background-color: #ccebff;
 }

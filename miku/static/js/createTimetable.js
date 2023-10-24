@@ -35,8 +35,10 @@ function generateDatesForOneMonth() {
         const year = currentDate.getFullYear();
         const month = (currentDate.getMonth() + 1).toString().padStart(2, '0'); // Display month with 2 digits
         const day = currentDate.getDate().toString().padStart(2, '0'); // Display day with 2 digits
+        const dayname = currentDate.getShortDayName();
         const formattedDate = `${year}-${month}-${day}`;
-        dates.push(formattedDate);
+        const dateArray = {'date': formattedDate, 'day': dayname};
+        dates.push(dateArray);
 
         currentDate.setDate(currentDate.getDate() + 1); // Move to the next day
     }
@@ -66,13 +68,18 @@ const times = generateTimesFor24Hours();
 
 const dateRow = document.createElement('tr');
 dateRow.classList.add('table-light');
-dateRow.innerHTML = '<th></th>';
+dateRow.innerHTML = "<th>#</th>";
+
 for (const date of dates) {
     const th = document.createElement('th');
-    th.textContent = date;
-    th.setAttribute('id', date);
-    th.setAttribute('data-date', date);
+    /* th.textContent = date; */
+    th.innerHTML = date['date'] + " " + date['day'];
+    th.setAttribute('id', date['date']);
+    th.setAttribute('data-date', date['date']);
+    th.setAttribute('scope', "col");
     dateRow.appendChild(th);
+
+    th.classList.add(date['day']);
 }
 
 const dateHead = document.createElement('thead');
@@ -88,13 +95,15 @@ for (const time of times) {
     timeCell.textContent = time;
     timeCell.setAttribute('id', time);
     timeCell.setAttribute('data-time', time);
+    timeCell.setAttribute('scope', "row");
     tr.appendChild(timeCell);
     for (const date of dates) {
         const td = document.createElement('td');
-        td.setAttribute('id', date+"-"+time);
-        td.setAttribute('data-date', date);
+        td.setAttribute('id', date['date']+"-"+time);
+        td.setAttribute('data-date', date['date']);
         td.setAttribute('data-time', time);
-        td.textContent = date.substring(5) + " " + time;
+        td.classList.add(date['day']);
+        td.textContent = date['date'].substring(5) + " " + time;
         tr.appendChild(td);
     }
     dateBody.appendChild(tr);
