@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block title %}{% trans "User Information" %}{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    <h2 class="my-4">{% trans "User Information" %}</h2>
+    <p>{% trans 'Username' %}: {{ user.username }}</p>
+{% if emailaddresses %}
+<p>{% trans 'The following email addresses are associated with your account:' %}</p>
+
+      <fieldset class="blockLabels">
+      {% for emailaddress in emailaddresses %}
+      <div class="row gx-2 mb-1">
+        <div class="col-md-2"></div>
+        <div class="col-md-6">
+          <div class="ctrlHolder">
+            {{ emailaddress.email }}
+            {% if emailaddress.verified %}
+              <span class="verified">{% trans "Verified" %}</span>
+            {% else %}
+              <span class="unverified">{% trans "Unverified" %}</span>
+            {% endif %}
+            {% if emailaddress.primary %}<span class="primary">{% trans "Primary" %}</span>{% endif %}
+            </label>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+
+    </div>
+
+  </fieldset>
+  </form>
+
+{% else %}
+{% include "account/snippets/warn_no_email.html" %}
+{% endif %}
+  </div>
+</div>
+{% endblock %}

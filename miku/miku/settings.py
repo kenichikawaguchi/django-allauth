@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'app1.apps.App1Config',
+    'user.apps.UserConfig',
     'accounts.apps.AccountsConfig',
 
     'allauth',
@@ -241,7 +242,7 @@ ACCOUNT_USERNAME_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 ACCOUNT_EMAIL_REQUIRED = True
 
-LOGIN_URL = 'app1:index'
+LOGIN_URL = 'account_login'
 LOGIN_REDIRECT_URL = 'app1:index'
 ACCOUNT_LOGOUT_REDIRECT_URL = 'app1:index'
 

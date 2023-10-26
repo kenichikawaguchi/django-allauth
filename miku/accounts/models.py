@@ -19,3 +19,11 @@ class CustomUser(AbstractUser):
 class UserTypeList(models.Model):
     user_type = models.ForeignKey(UserType, on_delete=models.PROTECT, blank=True, null=True)
     user = models.ForeignKey(CustomUser, on_delete=models.PROTECT, blank=True, null=True)
+
+    def __str__(self):
+        return self.user_type.name + "_" + self.user.username
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['user_type', 'user'], name='userTypeList_unique_entry')
+        ]
