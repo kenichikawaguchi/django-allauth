@@ -1,6 +1,4 @@
 const now = new Date();
-setDbgMsg("Database Time: " + now);
-setDbgMsg("Local Time: " + now.getStr());
 
 const currentHour = now.getHours();
 const currentMinutes = now.getMinutes();
@@ -14,7 +12,6 @@ const currentDay = now.getDate();
 const timetable = document.getElementById('timetable');
 
 let dateOffset = 0;
-
 
 function generateDatesForOneMonth() {
     const todaysDate = new Date();
@@ -70,9 +67,9 @@ const dateRow = document.createElement('tr');
 dateRow.classList.add('table-light');
 dateRow.innerHTML = "<th>#</th>";
 
+
 for (const date of dates) {
     const th = document.createElement('th');
-    /* th.textContent = date; */
     th.innerHTML = date['date'] + " " + date['day'];
     th.setAttribute('id', date['date']);
     th.setAttribute('data-date', date['date']);

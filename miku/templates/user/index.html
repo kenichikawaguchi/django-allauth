@@ -32,6 +32,20 @@
       {% endfor %}
 
     </div>
+    <div class="row">
+      <a href="{% url 'account_email' %}">email management</a>
+    </div>
+    {% if user_type_list %}
+    <div class="row">
+      <div class="col-md-3">
+        <ul class="list-group list-group-flush">User Types # of types: {{ user_type_list|length }}
+        {% for user_type in user_type_list %}
+          <li class="list-group-item">{{ user_type.user_type }}</li>
+        {% endfor %}
+        </ul>
+      </div>
+    </div>
+    {% endif %}
 
   </fieldset>
   </form>

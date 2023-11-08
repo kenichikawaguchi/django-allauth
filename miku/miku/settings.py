@@ -42,7 +42,7 @@ DEBUG = env('DEBUG')
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = env('SECRET_KEY')
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', 'localhost.pontalk.com',]
 
 
 # Application definition
@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'django.contrib.sites',
     'app1.apps.App1Config',
     'user.apps.UserConfig',
     'accounts.apps.AccountsConfig',
@@ -62,6 +63,9 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
+
+    'sslserver',
 ]
 
 MIDDLEWARE = [
@@ -194,18 +198,25 @@ LOGGING = {
         'console': {
             'level': 'DEBUG',
             'class': 'logging.StreamHandler',
-            'formatter': 'dev'
+            'formatter': 'simple'
         },
     },
 
     'formatters': {
-        'dev': {
+        'verbose': {
             'format': '\t'.join([
                 '%(asctime)s',
                 '[%(levelname)s]',
                 '%(pathname)s(Line:%(lineno)d)',
                 '%(message)s'
-            ])
+            ]),
+        },
+        'simple': {
+            'format': '\t'.join([
+                '%(asctime)s',
+                '[%(levelname)s]',
+                '%(message)s'
+            ]),
         },
     },
 }
@@ -229,6 +240,7 @@ EMAIL_USE_TLS = env('EMAIL_USE_TLS') == "True"
 
 AUTH_USER_MODEL = 'accounts.CustomUser'
 
+# SITE_ID = 4
 SITE_ID = 1
 
 AUTHENTICATION_BACKENDS = (
@@ -264,3 +276,38 @@ LOCALE_PATHS = [os.path.join(BASE_DIR, 'locale')]
 DATE_FORMAT = 'Y-m-d'
 
 TIME_FORMAT = 'H:i:s'
+
+# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+# SECURE_SSL_REDIRECT = False
+# SESSION_COOKIE_SECURE = True
+# CSRF_COOKIE_SECURE = True
+
+SOCIALACCOUNT_PROVIDERS = {
+    "github": {
+        # For each provider, you can choose whether or not the
+        # email address(es) retrieved from the provider are to be
+        # interpreted as verified.
+        "VERIFIED_EMAIL": True
+    },
+#    "google": {
+#        # For each OAuth based provider, either add a ``SocialApp``
+#        # (``socialaccount`` app) containing the required client
+#        # credentials, or list them here:
+#        "APPS": [
+#            {
+#                "client_id": env('GOOGLE_CLIENT_ID'),
+#                "secret": env('GOOGLE_SECRET'),
+#                "key": ""
+#            },
+#        ],
+#        # These are provider-specific settings that can only be
+#        # listed here:
+#        "SCOPE": [
+#            "profile",
+#            "email",
+#        ],
+#        "AUTH_PARAMS": {
+#            "access_type": "online",
+#        },
+#    }
+}

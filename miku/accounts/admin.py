@@ -1,6 +1,17 @@
 from django.contrib import admin
 
 from .models import CustomUser, UserType, UserTypeList
+from allauth.account.models import EmailAddress
+
+
+class EmailAddressInline(admin.TabularInline):
+    model = EmailAddress
+    extra = 1
+
+
+class UserTypeListInline(admin.TabularInline):
+    model = UserTypeList
+    extra = 1
 
 
 class UserTypeListAdmin(admin.ModelAdmin):
@@ -12,7 +23,9 @@ class UserTypeAdmin(admin.ModelAdmin):
 
 
 class CustomUserAdmin(admin.ModelAdmin):
-    list_display = ('id', 'username', 'user_type')
+    list_display = ('id', 'username', )
+    readonly_fields = ('date_joined', )
+    inlines = [UserTypeListInline, EmailAddressInline]
 
 
 admin.site.register(CustomUser, CustomUserAdmin)

@@ -9,6 +9,7 @@ from django.utils.translation import gettext as _
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from allauth.account.models import EmailAddress
+from accounts.models import UserTypeList
 
 
 logger = logging.getLogger(__name__)
@@ -23,9 +24,12 @@ class IndexView(LoginRequiredMixin, generic.TemplateView):
             {
                 "emailaddresses": list(
                     EmailAddress.objects.filter(user=self.request.user).order_by(
-                        "email"
+                        '-primary', '-verified', "email",
                     )
-                )
+                ),
+                "user_type_list": list(
+                    UserTypeList.objects.filter(user=self.request.user)
+                ),
             }
         )
         return context

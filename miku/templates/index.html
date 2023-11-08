@@ -3,6 +3,8 @@
 {% block title %}Project Miku{% endblock %}
 {% block content %}
 {% load tz %}
+
+<script src={% static 'js/myjs.js' %}></script>
 <section>
   <div class="container">
     <h2 class="my-4" id="index-title">Project Miku</h2>
@@ -11,9 +13,6 @@
       <ul class="list-unstyled ps-4" id="debug1">
       </ul>
     </div>
-    <script>
-      setDbgMsg("testmessage");
-    </script>
     <button type="button" id="backInTable">now</button>
     <p id="tzname"></p>
     <script>
@@ -33,23 +32,20 @@
       let lesson_slot;
       const timetable2 = document.getElementById('timetable2');
       {% for lesson in all_lessons %}
-        tmp_p = document.createElement('p');
-        tmp_p.innerText = new Date('{{ lesson.time|date:"r" }}').getStr();
-        tmp_p.innerText = tmp_p.innerText + ", Student: {{ lesson.student }}, Teacher: {{ lesson.teacher }}, booking: {{ lesson.booking }}";
-        timetable2.appendChild(tmp_p);
         try {
           const tmp_t = new Date('{{ lesson.time|date:"r" }}').getId();
           lesson_slot2 = document.getElementById(tmp_t);
-          tmp_p.innerText += " " + lesson_slot2.cellIndex + " " + new Date('{{ lesson.time|date:"r" }}').getTimeOffset();
-          tmp_button = document.createElement('button');
-          downOffset = new Date('{{ lesson.time|date:"r" }}').getTimeOffset();
-          /* tmp_button.addEventListener("click", {scrollLeft: lesson_slot2.cellIndex, scrollDown: downOffset, handleEvent: scrollTable}); */
-          tmp_button.addEventListener("click", {scrollLeft: lesson_slot2.cellIndex, scrollDown: lesson_slot2.parentElement.rowIndex, handleEvent: scrollTable});
-          tmp_button.type = 'button';
-          tmp_button.value = lesson_slot2.cellIndex + "*" + downOffset;
-          tmp_button.textContent = "move";
-          tmp_p.appendChild(tmp_button);
           if(lesson_slot2 !== null){
+            tmp_p = document.createElement('p');
+            tmp_p.innerText = new Date('{{ lesson.time|date:"r" }}').getStr();
+            tmp_p.innerText += ", Student: {{ lesson.student }}, Teacher: {{ lesson.teacher }}, booking: {{ lesson.booking }}";
+            timetable2.appendChild(tmp_p);
+            tmp_button = document.createElement('button');
+            tmp_button.addEventListener("click", {scrollLeft: lesson_slot2.cellIndex, scrollDown: lesson_slot2.parentElement.rowIndex, handleEvent: scrollTable});
+            tmp_button.type = 'button';
+            tmp_button.textContent = "move";
+            tmp_button.classList.add("mx-2");
+            tmp_p.appendChild(tmp_button);
             const booking_text = {% if lesson.booking == True %}"closed";{% else %}"open";{% endif %}
             {% if request.user.is_authenticated %}
               {% if user == lesson.student %}
